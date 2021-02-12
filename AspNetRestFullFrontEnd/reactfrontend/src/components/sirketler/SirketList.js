@@ -5,27 +5,28 @@ import { bindActionCreators } from "redux";
 import * as sirketActions from "../../redux/actions/sirketActions";
 
 
-
 class SirketList extends Component {
   componentDidMount() {
     //uygulama açıldığında dataları çeker
     this.props.actions.getSirketler();
   }
 
-    //sirketi seçme eventi
-    selectSirket = (s) => {
-      this.props.actions.changeSirket(s);   
-    };
-
+  //sirketi seçme eventi
+  sirketSec = (s) => {
+    this.props.actions.changeSirket(s);
+  };
 
   render() {
     return (
       <div>
         <h3>Şirketler</h3>
         <ListGroup>
-         
           {this.props.sirketler.map((s) => (
-            <ListGroupItem active={s.sirketId===this.props.seciliSirket.sirketId} onClick={() => this.selectSirket(s)} key={s.sirketId}>
+            <ListGroupItem
+              active={s.sirketId === this.props.seciliSirket.sirketId}
+              onClick={() => this.sirketSec(s)}
+              key={s.sirketId}
+            >
               {s.sirketAdi}
             </ListGroupItem>
           ))}
@@ -49,11 +50,8 @@ function maspDispatchToProps(dispatch) {
   return {
     actions: {
       getSirketler: bindActionCreators(sirketActions.getSirketler, dispatch),
-      seciliSirket:bindActionCreators(sirketActions.seciliSirket,dispatch)
-
+      seciliSirket: bindActionCreators(sirketActions.seciliSirket, dispatch),
     },
-
-
   };
 }
 

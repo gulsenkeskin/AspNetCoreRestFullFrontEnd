@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import axios from "axios";
+// import axios from "axios";
 
 //reducer da change sirket i gördüğü zaman biz state i payload da belirtilen
 export function changeSirket(sirket) {
@@ -13,11 +13,13 @@ export function getSirketSuccess(sirketler) {
 //sirketlerin tümünü getir
 export function getSirketler() {
   return function (dispatch) {
-    // let url = "http://localhost:5000/api/sirket";
-    // return fetch(url).then((result) => dispatch(getSirketSuccess(result)));
+    let url = "http://localhost:5000/api/sirket";
+    return fetch(url)
+      .then((response) => response.json())
+      .then((result) => dispatch(getSirketSuccess(result)));
     //------------
 
-    const result = axios.get(`http://localhost:5000/api/sirket`);
-    dispatch(getSirketSuccess(result));
+    // const result = axios.get(`http://localhost:5000/api/sirket`);
+    // dispatch(getSirketSuccess(result));
   };
 }
