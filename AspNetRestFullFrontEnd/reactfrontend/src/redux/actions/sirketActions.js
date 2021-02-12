@@ -3,7 +3,7 @@ import axios from "axios";
 
 //reducer da change sirket i gördüğü zaman biz state i payload da belirtilen
 export function changeSirket(sirket) {
-  return { type: actionTypes.CHANGE_SİRKET, payload: sirket };
+  return { type: actionTypes.CHANGE_SIRKET, payload: sirket };
 }
 
 export function getSirketSuccess(sirketler) {
@@ -13,7 +13,11 @@ export function getSirketSuccess(sirketler) {
 //sirketlerin tümünü getir
 export function getSirketler() {
   return function (dispatch) {
-    let url = "http://localhost:5000/sirket";
-    return fetch(url).then((result) => dispatch(getSirketSuccess(result)));
+    // let url = "http://localhost:5000/api/sirket";
+    // return fetch(url).then((result) => dispatch(getSirketSuccess(result)));
+    //------------
+
+    const result = axios.get(`http://localhost:5000/api/sirket`);
+    dispatch(getSirketSuccess(result));
   };
 }

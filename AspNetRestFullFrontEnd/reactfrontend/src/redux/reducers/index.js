@@ -1,8 +1,11 @@
 import { combineReducers } from "redux";
 import changeSirketReducer from "./changeSirketReducer";
-import { sirketListReducer } from "./sirketListReducer";
+import  sirketListReducer  from "./sirketListReducer";
 
 const rootReducer = combineReducers({
   changeSirketReducer,
-  sirketListReducer
+  sirketListReducer,
 });
+
+
+export default rootReducer;
