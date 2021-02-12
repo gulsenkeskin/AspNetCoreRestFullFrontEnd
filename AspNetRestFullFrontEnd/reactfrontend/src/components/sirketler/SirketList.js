@@ -50,7 +50,7 @@ function maspDispatchToProps(dispatch) {
   return {
     actions: {
       getSirketler: bindActionCreators(sirketActions.getSirketler, dispatch),
-      seciliSirket: bindActionCreators(sirketActions.seciliSirket, dispatch),
+      changeSirket: bindActionCreators(sirketActions.changeSirket, dispatch),
     },
   };
 }
