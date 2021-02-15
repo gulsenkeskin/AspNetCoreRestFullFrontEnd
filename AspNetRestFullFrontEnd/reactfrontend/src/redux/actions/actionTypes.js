@@ -1,3 +1,5 @@
 export const CHANGE_SIRKET = "CHANGE_SIRKET";
 
 export const GET_SIRKET_SUCCES = "GET_SIRKET_SUCCES";
+
+export const GET_BIRIM_SUCCESS = "GET_BIRIM_SUCCESS";

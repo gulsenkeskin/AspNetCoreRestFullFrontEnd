@@ -13,21 +13,9 @@ export function getSirketSuccess(sirketler) {
 //sirketlerin tümünü getir
 export function getSirketler() {
   return function (dispatch) {
-    // let url = "http://localhost:5000/api/sirket";
-    // return fetch(url)
-    //   .then((response) => response.json())
-    //   .then((result) => dispatch(getSirketSuccess(result)));
-    // //------------
-    // let url = "http://localhost:5000/api/sirket";
-    // return axios.get(url).then((response) => response.data).then(data=> dispatch(getSirketSuccess(data)));
-    //-------------
+ 
     let url = "http://localhost:5000/api/sirket";
-    return axios
-      .get(url)
-      .then((response) => response.json())
-      .then((result) => dispatch(getSirketSuccess(result)));
-
-    // const result = axios.get(`http://localhost:5000/api/sirket`);
-    // dispatch(getSirketSuccess(result));
+    return axios.get(url).then((response) => response.data).then(data=> dispatch(getSirketSuccess(data)));
+    
   };
 }
