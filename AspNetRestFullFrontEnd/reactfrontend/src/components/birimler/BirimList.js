@@ -1,20 +1,47 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Badge ,Table } from "reactstrap";
+import { Badge, Table } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as birimActions from "../../redux/actions/birimActions";
 
 class BirimList extends Component {
-
   componentDidMount() {
     this.props.actions.getBirimler();
   }
 
   render() {
+    // let sirket = this.props.seciliSirket.sirketId;
+    // const birimListe = [];
+    // if (sirket) {
+    //   // console.log("birimler",this.props.birimler);
+    //   this.props.birimler.map((birim) =>
+    //     birimListe.push(
+    //       <tr key={birim.birimId}>
+    //         <th scope="row">{birim.birimId}</th>
+    //         <td>{birim.kayitTarihi}</td>
+    //         <td>{birim.birimStr}</td>
+    //         <td>{birim.eBirimStr}</td>
+    //       </tr>
+    //     )
+    //   );
+    // } else {
+    //   this.props.birimler.map((b) =>
+    //     birimListe.push(
+    //       <tr key={b.birimId}>
+    //         <th scope="row">{b.birimId}</th>
+    //         <td>{b.kayitTarihi}</td>
+    //         <td>{b.birimStr}</td>
+    //         <td>{b.eBirimStr}</td>
+    //       </tr>
+    //     )
+    //   );
+    // }
+
     return (
       <div>
         <h3>
-          Birimler <Badge color="success">{this.props.seciliSirket.sirketAdi}</Badge>
+          Birimler
+          <Badge color="success">{this.props.seciliSirket.sirketAdi}</Badge>
         </h3>
         <Table>
           <thead>
@@ -26,6 +53,7 @@ class BirimList extends Component {
             </tr>
           </thead>
           <tbody>
+            {/* {birimListe} */}
             {this.props.birimler.map((b) => (
               <tr key={b.birimId}>
                 <th scope="row">{b.birimId}</th>
@@ -34,6 +62,16 @@ class BirimList extends Component {
                 <td>{b.eBirimStr}</td>
               </tr>
             ))}
+           
+
+            {/* {this.props.birimler.map((b) => (b.birims.map(birim=>(
+              <tr key={b.birimId}>
+                <th scope="row">{b.birimId}</th>
+                <td>{b.kayitTarihi}</td>
+                <td>{b.birimStr}</td>
+                <td>{b.eBirimStr}</td>
+              </tr>
+            ))))} */}
           </tbody>
         </Table>
       </div>
@@ -48,15 +86,13 @@ function mapStateToProps(state) {
   };
 }
 
-
 //aksiyonu proplara bağla
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
       getBirimler: bindActionCreators(birimActions.getBirimler, dispatch),
-      
     },
   };
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(BirimList);
+export default connect(mapStateToProps, mapDispatchToProps)(BirimList);

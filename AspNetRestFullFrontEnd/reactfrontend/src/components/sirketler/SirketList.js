@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as sirketActions from "../../redux/actions/sirketActions";
-
+import * as birimActions from "../../redux/actions/birimActions";
 
 class SirketList extends Component {
   componentDidMount() {
@@ -14,6 +14,7 @@ class SirketList extends Component {
   //sirketi seçme eventi
   sirketSec = (s) => {
     this.props.actions.changeSirket(s);
+    this.props.actions.getBirimler(s.sirketId);
   };
 
   render() {
@@ -51,6 +52,7 @@ function maspDispatchToProps(dispatch) {
     actions: {
       getSirketler: bindActionCreators(sirketActions.getSirketler, dispatch),
       changeSirket: bindActionCreators(sirketActions.changeSirket, dispatch),
+      getBirimler: bindActionCreators(birimActions.getBirimler, dispatch),
     },
   };
 }
