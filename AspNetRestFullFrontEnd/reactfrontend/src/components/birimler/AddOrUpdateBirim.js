@@ -17,6 +17,7 @@ function AddOrUpdateBirim({
   ...props
 }) {
   const [birim, setBirim] = useState({ ...props.birim });
+  const [errors, setErrors] = useState({});
   //şirketleri getirmek için
   useEffect(() => {
     if (sirketler.length === 0) {
@@ -33,6 +34,26 @@ function AddOrUpdateBirim({
       ...previousBirim,
       [name]: name === "sirketId" ? parseInt(value, 10) : value,
     }));
+    validate(name, value);
+  }
+  function validate(name, value) {
+    if (name === "birimStr" && value === "") {
+      setErrors((previousErrors) => ({
+        ...previousErrors,
+        birimStr: "Birim Str alanı boş bırakılamaz",
+      }));
+    } else if (name === "eBirimStr" && value === "") {
+      setErrors((previousErrors) => ({
+        ...previousErrors,
+        birimStr: "E Birim Str alanı boş bırakılamaz",
+      }));
+    } else {
+      setErrors((previousErrors) => ({
+        ...previousErrors,
+        birimStr: "",
+        eBirimStr: "",
+      }));
+    }
   }
 
   function handleSave(event) {
@@ -40,27 +61,34 @@ function AddOrUpdateBirim({
     saveBirim(birim).then(() => history.push("/"));
   }
 
-  return(
-      <BirimDetail birim={birim} sirketler={sirketler} onChange={handleChange} onSave={handleSave}></BirimDetail>
-  )
-
+  return (
+    <BirimDetail
+      birim={birim}
+      sirketler={sirketler}
+      onChange={handleChange}
+      onSave={handleSave}
+      errors={errors}
+    ></BirimDetail>
+  );
 }
 
-export function getBirimById(birimler,birimId){
-    let birim=birimler.find(birim=>birim.birimId==birimId)||null;
-    return birim;
+export function getBirimById(birimler, birimId) {
+  let birim = birimler.find((birim) => birim.birimId == birimId) || null;
+  return birim;
 }
 //reduxtaki mevcut stateleri bağlamak için
-function mapStateToProps(state,ownProps){
-    const birimId=ownProps.match.params.birimId
-    const birim=birimId && state.birimListReducer.length>0
-    ?getBirimById(state.birimListReducer,birimId):{}
-    //mevcut state i oluştur
-    return{
-        birim,
-        birimler:state.birimListReducer,
-        sirketler:state.sirketListReducer
-    }
+function mapStateToProps(state, ownProps) {
+  const birimId = ownProps.match.params.birimId;
+  const birim =
+    birimId && state.birimListReducer.length > 0
+      ? getBirimById(state.birimListReducer, birimId)
+      : {};
+  //mevcut state i oluştur
+  return {
+    birim,
+    birimler: state.birimListReducer,
+    sirketler: state.sirketListReducer,
+  };
 }
 
 const mapDispatchToProps = {
@@ -68,4 +96,4 @@ const mapDispatchToProps = {
   saveBirim,
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddOrUpdateBirim);
+export default connect(mapStateToProps, mapDispatchToProps)(AddOrUpdateBirim);
