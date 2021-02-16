@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { ListGroup, ListGroupItem } from "reactstrap";
+import { ListGroup, ListGroupItem,Badge } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as sirketActions from "../../redux/actions/sirketActions";
 import * as birimActions from "../../redux/actions/birimActions";
@@ -20,7 +20,9 @@ class SirketList extends Component {
   render() {
     return (
       <div>
-        <h3>Şirketler</h3>
+       <h3>
+       <Badge color="info">Şirketler</Badge> 
+       </h3>
         <ListGroup>
           {this.props.sirketler.map((s) => (
             <ListGroupItem

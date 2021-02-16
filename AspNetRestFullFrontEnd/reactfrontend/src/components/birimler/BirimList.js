@@ -40,8 +40,7 @@ class BirimList extends Component {
     return (
       <div>
         <h3>
-          Birimler
-          <Badge color="success">{this.props.seciliSirket.sirketAdi}</Badge>
+         <Badge color="info">Birimler</Badge>  <Badge color="success">{this.props.seciliSirket.sirketAdi}</Badge>
         </h3>
         <Table>
           <thead>
