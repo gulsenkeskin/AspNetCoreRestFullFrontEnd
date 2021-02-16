@@ -13,6 +13,7 @@ import {
   DropdownItem,
   NavbarText,
 } from "reactstrap";
+import {Link} from "react-router-dom"
 
 const Navi = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,18 +23,14 @@ const Navi = (props) => {
   return (
     <div>
       <Navbar color="light" light expand="md" >
-        <NavbarBrand href="/"></NavbarBrand>
+        <NavbarBrand><Link to="/">Anasayfa</Link></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Components</NavLink>
+              <NavLink><Link to="/savebirim">Birim Ekle</Link></NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
-            </NavItem>
+           
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Options

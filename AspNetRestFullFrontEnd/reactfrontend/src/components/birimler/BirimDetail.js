@@ -2,7 +2,7 @@ import React from "react";
 import TextInput from "../toolbox/TextInput";
 import SelectInput from "../toolbox/SelectInput";
 
-const BirimDetail = ({ sirketler, birim, onSave, onChange }) => {
+const BirimDetail = ({ sirketler, birim, onSave, onChange,errors }) => {
   return (
     <form onSubmit={onSave}>
       <h2>{birim.birimId ? "Güncelle" : "Ekle"}</h2>
@@ -11,7 +11,7 @@ const BirimDetail = ({ sirketler, birim, onSave, onChange }) => {
         label="Birim Str"
         value={birim.birimStr}
         onChange={onChange}
-        error="Hata"
+        error={errors.birimStr}
       ></TextInput>
 
       <TextInput
@@ -19,7 +19,7 @@ const BirimDetail = ({ sirketler, birim, onSave, onChange }) => {
         label="E Birim Str"
         value={birim.eBirimStr}
         onChange={onChange}
-        error="Hata"
+        error={errors.eBirimStr}
       ></TextInput>
 
       <SelectInput
@@ -32,7 +32,7 @@ const BirimDetail = ({ sirketler, birim, onSave, onChange }) => {
           text: sirket.sirketAdi,
         }))}
         onChange={onChange}
-        error="Hata"
+        error={errors.sirketId}
       ></SelectInput>
 
       <button type="submit" className="btn btn-success">
