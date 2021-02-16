@@ -2,5 +2,6 @@
 export default {
   seciliSirket: {},
   sirketler: [],
-  birimler:[]
+  birimler:[],
+  savedBirim:{}
 };

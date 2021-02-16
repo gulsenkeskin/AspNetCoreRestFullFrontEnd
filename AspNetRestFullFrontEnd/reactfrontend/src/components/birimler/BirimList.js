@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Badge, Table } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as birimActions from "../../redux/actions/birimActions";
+import {Link} from "react-router-dom"
 
 class BirimList extends Component {
   componentDidMount() {
@@ -56,7 +57,7 @@ class BirimList extends Component {
             {this.props.birimler.map((b) => (
               <tr key={b.birimId}>
                 <th scope="row">{b.birimId}</th>
-                <td>{b.kayitTarihi}</td>
+                <td><Link to={"/savebirim/"+b.birimId}>{b.kayitTarihi}</Link></td>
                 <td>{b.birimStr}</td>
                 <td>{b.eBirimStr}</td>
               </tr>
