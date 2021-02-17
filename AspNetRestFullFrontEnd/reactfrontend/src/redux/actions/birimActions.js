@@ -29,27 +29,29 @@ export function removeBirim(birim) {
   };
 }
 
-// export function saveBirimApi(birim) {
-//   return fetch("http://localhost:5000/api/birim/" + (birim.birimId || ""), {
-//     method: birim.birimId ? "PUT" : "POST",
-//     headers: { "content-type": "application/json" },
-//     body: JSON.stringify(birim),
-//   })
-//     .then(handleResponse)
-//     .catch(handleError);
-// }
 export function saveBirimApi(birim) {
-
-  return axios({
-    // method: birim.birimId ? "PUT" : "POST",
-    method: "post",
-    url: "http://localhost:5000/api/birim"
-    // headers: { "content-type": "application/json" },
-    // body: JSON.stringify(birim),
+  return fetch("http://localhost:5000/api/birim/" + (birim.birimId || ""), {
+    method: birim.birimId ? "PUT" : "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(birim),
   })
     .then(handleResponse)
     .catch(handleError);
 }
+
+
+// export function saveBirimApi(birim) {
+
+//   return axios({
+//     // method: birim.birimId ? "PUT" : "POST",
+//     method: "post",
+//     url: "http://localhost:5000/api/birim"
+//     // headers: { "content-type": "application/json" },
+//     // body: JSON.stringify(birim),
+//   })
+//     .then(handleResponse)
+//     .catch(handleError);
+// }
 
 export function saveBirim(birim) {
   return function (dispatch) {
