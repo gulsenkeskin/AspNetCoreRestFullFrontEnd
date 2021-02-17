@@ -27,7 +27,6 @@ function AddOrUpdateBirim({
   }, [props.birim]);
 
   function handleChange(event) {
-    //textbox ın name ve value değerini atar
     const { name, value } = event.target;
     //previous birim statedeki birim demek
     setBirim((previousBirim) => ({
@@ -59,6 +58,7 @@ function AddOrUpdateBirim({
   function handleSave(event) {
     event.preventDefault();
     saveBirim(birim).then(() => history.push("/"));
+   
   }
 
   return (

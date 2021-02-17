@@ -22,10 +22,10 @@ export function removeBirimSuccess(birim) {
 
 export function removeBirim(birim) {
   return function (dispatch) {
-    
-      let url = "http://localhost:5000/api/birim/"+birim.birimId;
-      return axios
-        .delete(url)
+    let url = "http://localhost:5000/api/birim/" + birim.birimId;
+    return axios.delete(url);
+    //.then((response) => response.birim)
+    // .then((birim) => dispatch(removeBirimSuccess(birim)));
   };
 }
 
@@ -38,20 +38,6 @@ export function saveBirimApi(birim) {
     .then(handleResponse)
     .catch(handleError);
 }
-
-
-// export function saveBirimApi(birim) {
-
-//   return axios({
-//     // method: birim.birimId ? "PUT" : "POST",
-//     method: "post",
-//     url: "http://localhost:5000/api/birim"
-//     // headers: { "content-type": "application/json" },
-//     // body: JSON.stringify(birim),
-//   })
-//     .then(handleResponse)
-//     .catch(handleError);
-// }
 
 export function saveBirim(birim) {
   return function (dispatch) {
@@ -87,8 +73,7 @@ export function getBirimler(sirketId) {
 
 export async function handleResponse(response) {
   if (response.ok) {
-    //return response.json();
-    return response.data;
+   return response.json();
   }
   const error = await response.text();
   throw new Error(error);
