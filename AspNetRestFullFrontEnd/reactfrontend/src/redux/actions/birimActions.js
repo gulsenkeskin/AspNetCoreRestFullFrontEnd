@@ -15,12 +15,37 @@ export function updateBirimSuccess(birim) {
   return { type: actionTypes.UPDATE_BIRIM_SUCCESS, payload: birim };
 }
 
+//BİRİM SİLME
+export function removeBirimSuccess(birim) {
+  return { type: actionTypes.REMOVE_BIRIM, payload: birim };
+}
 
+export function removeBirim(birim) {
+  return function (dispatch) {
+    
+      let url = "http://localhost:5000/api/birim/"+birim.birimId;
+      return axios
+        .delete(url)
+  };
+}
+
+// export function saveBirimApi(birim) {
+//   return fetch("http://localhost:5000/api/birim/" + (birim.birimId || ""), {
+//     method: birim.birimId ? "PUT" : "POST",
+//     headers: { "content-type": "application/json" },
+//     body: JSON.stringify(birim),
+//   })
+//     .then(handleResponse)
+//     .catch(handleError);
+// }
 export function saveBirimApi(birim) {
-  return fetch("http://localhost:5000/api/birim/" + (birim.birimId || ""), {
-    method: birim.birimId ? "PUT" : "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(birim),
+
+  return axios({
+    // method: birim.birimId ? "PUT" : "POST",
+    method: "post",
+    url: "http://localhost:5000/api/birim"
+    // headers: { "content-type": "application/json" },
+    // body: JSON.stringify(birim),
   })
     .then(handleResponse)
     .catch(handleError);
@@ -40,18 +65,8 @@ export function saveBirim(birim) {
   };
 }
 
-
 export function getBirimler(sirketId) {
   return function (dispatch) {
-    // let url = "http://localhost:5000/api/birim";
-    // if (sirketId) {
-    //   url = "http://localhost:5000/api/sirket/"+sirketId+"/birim";
-    // }
-    // return axios
-    //   .get(url)
-    //   .then((response) => response.data)
-    //   .then((data) => dispatch(getBirimSuccess(data)));
-
     if (sirketId) {
       let url = "http://localhost:5000/api/sirket/" + sirketId + "/birim";
       return axios
@@ -70,9 +85,9 @@ export function getBirimler(sirketId) {
 
 export async function handleResponse(response) {
   if (response.ok) {
-    return response.json();
+    //return response.json();
+    return response.data;
   }
-  //hata varsa bir sonraki aşamada catch i çalıştırır
   const error = await response.text();
   throw new Error(error);
 }

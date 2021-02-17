@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Badge, Table } from "reactstrap";
+import { Badge, Table,Button } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as birimActions from "../../redux/actions/birimActions";
 import {Link} from "react-router-dom"
+import alertify from "alertifyjs";
+
 
 class BirimList extends Component {
+
   componentDidMount() {
     this.props.actions.getBirimler();
+  }
+  removeBirim(birim) {
+    this.props.actions.removeBirim(birim);
+    this.props.actions.removeBirimSuccess(birim);
+    alertify.error(birim.birimStr + " birimi silindi");
   }
 
   render() {
@@ -50,6 +58,7 @@ class BirimList extends Component {
               <th>Kayıt Tarihi</th>
               <th>Birim Str</th>
               <th>E Birim Str</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -60,6 +69,14 @@ class BirimList extends Component {
                 <td><Link to={"/savebirim/"+b.birimId}>{b.kayitTarihi}</Link></td>
                 <td>{b.birimStr}</td>
                 <td>{b.eBirimStr}</td>
+                <td>
+                  <Button
+                    color="danger"
+                    onClick={() => this.removeBirim(b)}
+                  >
+                    Sil
+                  </Button>
+                </td>
               </tr>
             ))}
            
@@ -91,6 +108,9 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       getBirimler: bindActionCreators(birimActions.getBirimler, dispatch),
+      removeBirim: bindActionCreators(birimActions.removeBirim, dispatch),
+      removeBirimSuccess: bindActionCreators(birimActions.removeBirimSuccess, dispatch)
+
     },
   };
 }
