@@ -26,6 +26,8 @@ function AddOrUpdateBirim({
     setBirim({ ...props.birim });
   }, [props.birim]);
 
+  
+
   function handleChange(event) {
     const { name, value } = event.target;
     //previous birim statedeki birim demek
@@ -55,10 +57,9 @@ function AddOrUpdateBirim({
     }
   }
 
-  function handleSave(event) {
+  function handleSave(event){   
     event.preventDefault();
     saveBirim(birim).then(() => history.push("/"));
-   
   }
 
   return (
@@ -73,7 +74,7 @@ function AddOrUpdateBirim({
 }
 
 export function getBirimById(birimler, birimId) {
-  let birim = birimler.find((birim) => birim.birimId == birimId) || null;
+  let birim = birimler.find((birim) => birim.birimId ==birimId) || null;
   return birim;
 }
 //reduxtaki mevcut stateleri bağlamak için

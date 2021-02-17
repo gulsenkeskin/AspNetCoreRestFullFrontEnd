@@ -24,13 +24,15 @@ export function removeBirim(birim) {
   return function (dispatch) {
     let url = "http://localhost:5000/api/birim/" + birim.birimId;
     return axios.delete(url);
-    //.then((response) => response.birim)
-    // .then((birim) => dispatch(removeBirimSuccess(birim)));
+    // .then((response) => dispatch(removeBirimSuccess(response.data)))
+    // .catch(error => {
+    //   throw(error);
+    // });
   };
 }
 
 export function saveBirimApi(birim) {
-  return fetch("http://localhost:5000/api/birim/" + (birim.birimId || ""), {
+  return fetch("http://localhost:5000/api/birim", {
     method: birim.birimId ? "PUT" : "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(birim),
@@ -38,7 +40,6 @@ export function saveBirimApi(birim) {
     .then(handleResponse)
     .catch(handleError);
 }
-
 export function saveBirim(birim) {
   return function (dispatch) {
     return saveBirimApi(birim)
@@ -52,6 +53,30 @@ export function saveBirim(birim) {
       });
   };
 }
+
+// export function saveBirimApi(birim) {
+//   return axios("http://localhost:5000/api/birim", {
+//     method: birim.birimId ? "put" : "post",
+//     headers: { "content-type": "application/json" },
+//     body: JSON.stringify(birim),
+//   })
+//     .then(handleResponse)
+//     .catch(handleError);
+// }
+
+// export function saveBirim(birim) {
+//   return function (dispatch) {
+//     return saveBirimApi(birim)
+//       .then((savedBirim) => {
+//         birim.birimId
+//           ? dispatch(updateBirimSuccess(savedBirim))
+//           : dispatch(createBirimSuccess(savedBirim));
+//       })
+//       .catch((error) => {
+//         throw error;
+//       });
+//   };
+// }
 
 export function getBirimler(sirketId) {
   return function (dispatch) {
@@ -73,7 +98,10 @@ export function getBirimler(sirketId) {
 
 export async function handleResponse(response) {
   if (response.ok) {
-   return response.json();
+    return response.json();
+  
+    // console.log(response.data);
+
   }
   const error = await response.text();
   throw new Error(error);
