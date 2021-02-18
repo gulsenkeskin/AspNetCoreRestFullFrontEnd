@@ -31,15 +31,37 @@ export function removeBirim(birim) {
   };
 }
 
+// export function saveBirimApi(birim) {
+//   return fetch("http://localhost:5000/api/birim", {
+//     method: birim.birimId ? "PUT" : "POST",
+//     headers: { "content-type": "application/json" },
+//     body: JSON.stringify(birim),
+//   })
+//     .then(handleResponse)
+//     .catch(handleError);
+// }
+
+
+
+  // .then(function (response) {
+  //   console.log(response);
+  // });
+
 export function saveBirimApi(birim) {
-  return fetch("http://localhost:5000/api/birim", {
-    method: birim.birimId ? "PUT" : "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(birim),
-  })
+  const axios = require("axios");
+  return axios
+    .post("http://localhost:5000/api/birim", {
+      "birimStr":birim.birimStr,
+      "eBirimStr":birim.eBirimStr,
+      "sirketId":birim.sirketId,
+      // method: birim.birimId ? "PUT" : "POST",
+      // headers: { "content-type": "application/json" },
+      // body: JSON.stringify(birim),
+    })
     .then(handleResponse)
     .catch(handleError);
 }
+
 export function saveBirim(birim) {
   return function (dispatch) {
     return saveBirimApi(birim)
@@ -99,9 +121,8 @@ export function getBirimler(sirketId) {
 export async function handleResponse(response) {
   if (response.ok) {
     return response.json();
-  
-    // console.log(response.data);
 
+    // console.log(response.data);
   }
   const error = await response.text();
   throw new Error(error);
